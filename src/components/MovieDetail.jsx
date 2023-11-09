@@ -36,18 +36,35 @@ export const MovieDetail = () => {
   useEffect(() => {
     handleFetchData();
   }, []);
+
   return (
     !loading && (
-      <div
-        className="movieDetail"
-        style={{
-          backgroundImage:
-            'url(' +
-            `https://image.tmdb.org/t/p/w1280${movieDetail.backdrop_path}` +
-            ')',
-        }}
-      >
-        <h1>{movieDetail.original_title}</h1>
+      <div className="movieDetail">
+        <div
+          className="movieDetailBackground"
+          style={{
+            backgroundImage:
+              'url(' +
+              `https://image.tmdb.org/t/p/w1280${movieDetail.backdrop_path}` +
+              '), linear-gradient(rgba(0, 0, 0, 0) 70%, rgb(0, 0, 0) 100%)',
+          }}
+        >
+          <div className="movieDetailSummary">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
+            />
+            <div className="movieDetailDetails">
+              <h1>
+                <span className="title">{movieDetail.original_title}</span>
+                <span className="rating">
+                  {movieDetail.vote_average.toFixed(1)}
+                </span>
+              </h1>
+              <p>{movieDetail.overview}</p>
+            </div>
+          </div>
+        </div>
+
         {/* <HoverOverlay originalTitle={originalTitle} releaseDate={releaseDate} /> */}
         {/* <img src={posterImage} /> */}
       </div>
