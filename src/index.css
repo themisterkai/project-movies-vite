@@ -72,7 +72,6 @@ body {
   background-size: cover;
   flex-direction: column;
   justify-content: flex-end;
-  background-image: linear-gradient(rgba(0, 0, 0, 0) 100%, rgb(0, 0, 0) 100%);
 }
 
 .movieDetail .movieDetailSummary {
@@ -80,7 +79,7 @@ body {
   flex-direction: row;
   align-items: flex-end;
   padding: 50px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0) 20%, rgb(0, 0, 0) 100%);
+  background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%);
 }
 
 .movieDetail img {

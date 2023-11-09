@@ -46,7 +46,7 @@ export const MovieDetail = () => {
             backgroundImage:
               'url(' +
               `https://image.tmdb.org/t/p/w1280${movieDetail.backdrop_path}` +
-              '), linear-gradient(rgba(0, 0, 0, 0) 70%, rgb(0, 0, 0) 100%)',
+              ')',
           }}
         >
           <div className="movieDetailSummary">
