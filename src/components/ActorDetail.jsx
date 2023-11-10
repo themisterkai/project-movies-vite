@@ -4,11 +4,9 @@ import { useParams, Link } from 'react-router-dom';
 import { API_KEY } from '../constants';
 import { NotFound } from './NotFound';
 import { Loading } from './Loading';
-import { CastDetail } from './CastDetail';
 
 export const ActorDetail = () => {
   const { id } = useParams();
-  console.log('*********actor', id);
   const [actorDetail, setActorDetail] = useState({});
   const [movies, setMovies] = useState([]);
   const [notFound, setNotFound] = useState(false);
