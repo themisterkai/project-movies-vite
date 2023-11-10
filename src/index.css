@@ -8,8 +8,8 @@
 }
 
 @font-face {
-  font-family: 'bebas';
-  src: url('../Bebas.ttf');
+  font-family: 'permanentMarker';
+  src: url('../PermanentMarker.ttf');
 }
 
 code {
@@ -148,7 +148,8 @@ a {
   text-shadow: 1px 1px #4d4d4d;
 }
 
-.notFound {
+.notFound,
+.loading {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -157,8 +158,9 @@ a {
   text-align: center;
 }
 
-.notFound h1 {
-  font-family: 'bebas';
+.notFound h1,
+.loading h1 {
+  font-family: 'permanentMarker';
   font-size: 80px;
   color: rgb(255, 255, 255);
   text-shadow: 3px 3px rgb(168, 9, 9);

@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 
 import { MoviePoster } from './MoviePoster';
 import { API_KEY } from '../constants';
+import { Loading } from './Loading';
 
 export const MovieList = () => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
   const handleFetchData = async () => {
     try {
       const response = await fetch(
@@ -22,6 +24,7 @@ export const MovieList = () => {
         );
       }
       setMovies(data.results);
+      setLoading(false);
       console.log(data.results);
     } catch (e) {
       // we can log the error in case it will be useful for users when reporting bugs to us
@@ -34,13 +37,16 @@ export const MovieList = () => {
   }, []);
 
   return (
-    <div className="movieWrapper">
-      {movies.map(movie => (
-        <div key={movie.id} className="movies">
-          <MoviePoster {...movie} />
-        </div>
-      ))}
-    </div>
+    (loading && <Loading />) ||
+    (!loading && (
+      <div className="movieWrapper">
+        {movies.map(movie => (
+          <div key={movie.id} className="movies">
+            <MoviePoster {...movie} />
+          </div>
+        ))}
+      </div>
+    ))
   );
 };
 
