@@ -21,7 +21,7 @@ export const MoviePoster = ({
 };
 
 MoviePoster.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   original_title: PropTypes.string.isRequired,
   poster_path: PropTypes.string.isRequired,
   release_date: PropTypes.string.isRequired,
