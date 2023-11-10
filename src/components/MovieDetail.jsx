@@ -1,14 +1,13 @@
-// import { PropTypes } from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import { API_KEY } from '../constants';
-// import { backArrow } from '/backArrow.svg';
+import { NotFound } from './NotFound';
 
 export const MovieDetail = () => {
   const { id } = useParams();
-  // console.log('************', useParam   s());
   const [movieDetail, setMovieDetail] = useState({});
+  const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(true);
   const handleFetchData = async () => {
     try {
@@ -16,6 +15,11 @@ export const MovieDetail = () => {
         `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
       );
       const data = await response.json();
+      if (response.status === 404) {
+        setLoading(false);
+        setNotFound(true);
+        return;
+      }
       if (response.status >= 400 && response.status < 600) {
         throw new Error(
           JSON.stringify({
@@ -39,10 +43,12 @@ export const MovieDetail = () => {
   }, []);
 
   return (
-    !loading && (
+    !loading &&
+    (notFound ? (
+      <NotFound />
+    ) : (
       <div className="movieDetail">
         <Link className="back" to={`/`}>
-          {/* <backArrow /> */}
           <span className="material-symbols-outlined">arrow_back_ios_new</span>
           Movies
         </Link>
@@ -70,17 +76,9 @@ export const MovieDetail = () => {
             </div>
           </div>
         </div>
-
-        {/* <HoverOverlay originalTitle={originalTitle} releaseDate={releaseDate} /> */}
-        {/* <img src={posterImage} /> */}
       </div>
-    )
+    ))
   );
 };
 
-MovieDetail.propTypes = {
-  //   // id: PropTypes.string.isRequired,
-  // title: PropTypes.string.isRequired,
-  //   poster_path: PropTypes.string.isRequired,
-  //   release_date: PropTypes.string.isRequired,
-};
+MovieDetail.propTypes = {};

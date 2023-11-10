@@ -7,6 +7,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: 'bebas';
+  src: url('../Bebas.ttf');
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -15,6 +20,11 @@ code {
 body {
   background-color: black;
   margin: 0px;
+  color: white;
+}
+
+a {
+  color: white;
 }
 
 .movieWrapper {
@@ -136,6 +146,22 @@ body {
 .movieDetailDetails p {
   max-width: 400px;
   text-shadow: 1px 1px #4d4d4d;
+}
+
+.notFound {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.notFound h1 {
+  font-family: 'bebas';
+  font-size: 80px;
+  color: rgb(255, 255, 255);
+  text-shadow: 3px 3px rgb(168, 9, 9);
 }
 
 @media (min-width: 1025px) {
