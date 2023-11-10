@@ -61,7 +61,7 @@ export const MovieDetail = () => {
             <span className="material-symbols-outlined">
               arrow_back_ios_new
             </span>
-            Movies
+            Home
           </Link>
           <div
             className="movieDetailBackground"
