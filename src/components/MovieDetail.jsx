@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 
 import { API_KEY } from '../constants';
 import { NotFound } from './NotFound';
+import { Loading } from './Loading';
 
 export const MovieDetail = () => {
   const { id } = useParams();
@@ -43,41 +44,44 @@ export const MovieDetail = () => {
   }, []);
 
   return (
-    !loading &&
-    (notFound ? (
-      <NotFound />
-    ) : (
-      <div className="movieDetail">
-        <Link className="back" to={`/`}>
-          <span className="material-symbols-outlined">arrow_back_ios_new</span>
-          Movies
-        </Link>
-        <div
-          className="movieDetailBackground"
-          style={{
-            backgroundImage:
-              'url(' +
-              `https://image.tmdb.org/t/p/w1280${movieDetail.backdrop_path}` +
-              ')',
-          }}
-        >
-          <div className="movieDetailSummary">
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
-            />
-            <div className="movieDetailDetails">
-              <h2>
-                <span className="title">{movieDetail.original_title}</span>
-                <span className="rating">
-                  {movieDetail.vote_average.toFixed(1)}
-                </span>
-              </h2>
-              <p>{movieDetail.overview}</p>
+    (loading && <Loading />) ||
+    (!loading &&
+      (notFound ? (
+        <NotFound />
+      ) : (
+        <div className="movieDetail">
+          <Link className="back" to={`/`}>
+            <span className="material-symbols-outlined">
+              arrow_back_ios_new
+            </span>
+            Movies
+          </Link>
+          <div
+            className="movieDetailBackground"
+            style={{
+              backgroundImage:
+                'url(' +
+                `https://image.tmdb.org/t/p/w1280${movieDetail.backdrop_path}` +
+                ')',
+            }}
+          >
+            <div className="movieDetailSummary">
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
+              />
+              <div className="movieDetailDetails">
+                <h2>
+                  <span className="title">{movieDetail.original_title}</span>
+                  <span className="rating">
+                    {movieDetail.vote_average.toFixed(1)}
+                  </span>
+                </h2>
+                <p>{movieDetail.overview}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    ))
+      )))
   );
 };
 
