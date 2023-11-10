@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import moment from 'moment';
 
 import { API_KEY } from '../constants';
 import { NotFound } from './NotFound';
@@ -62,7 +63,7 @@ export const ActorDetail = () => {
             <span className="material-symbols-outlined">
               arrow_back_ios_new
             </span>
-            Movies
+            Home
           </Link>
           {/* <div
           className="actorDetailBackground"
@@ -79,12 +80,25 @@ export const ActorDetail = () => {
             />
             <div className="actorDetailDetails">
               <h2>
-                <span className="title">{actorDetail.name}</span>
+                <span className="actorName">{actorDetail.name}</span>
                 {/* <span className="rating">
                   {actorDetail.vote_average.toFixed(1)}
                 </span> */}
               </h2>
-              <p>{actorDetail.biography}</p>
+              {actorDetail.birthday && (
+                <p>Born: {moment(actorDetail.birthday).format('LL')}</p>
+              )}
+              {actorDetail.deathday && (
+                <p>Died: {moment(actorDetail.deathday).format('LL')}</p>
+              )}
+              {/* <p>
+                <a
+                  href={`https://www.imdb.com/name/${actorDetail.imdb_id}`}
+                  target={`_blank`}
+                >
+                  IMDB Profile
+                </a>
+              </p> */}
               <h4>Top Movies</h4>
               {movies.map(movie => (
                 <li key={movie.id}>
