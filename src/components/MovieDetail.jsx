@@ -1,8 +1,9 @@
 // import { PropTypes } from 'prop-types';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { API_KEY } from '../constants';
+// import { backArrow } from '/backArrow.svg';
 
 export const MovieDetail = () => {
   const { id } = useParams();
@@ -40,6 +41,11 @@ export const MovieDetail = () => {
   return (
     !loading && (
       <div className="movieDetail">
+        <Link className="back" to={`/`}>
+          {/* <backArrow /> */}
+          <span className="material-symbols-outlined">arrow_back_ios_new</span>
+          Movies
+        </Link>
         <div
           className="movieDetailBackground"
           style={{
