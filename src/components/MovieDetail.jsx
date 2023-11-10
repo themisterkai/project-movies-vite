@@ -4,10 +4,12 @@ import { useParams, Link } from 'react-router-dom';
 import { API_KEY } from '../constants';
 import { NotFound } from './NotFound';
 import { Loading } from './Loading';
+import { CastDetail } from './CastDetail';
 
 export const MovieDetail = () => {
   const { id } = useParams();
   const [movieDetail, setMovieDetail] = useState({});
+  const [cast, setCast] = useState([]);
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(true);
   const handleFetchData = async () => {
@@ -16,7 +18,11 @@ export const MovieDetail = () => {
         `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
       );
       const data = await response.json();
-      if (response.status === 404) {
+      const castResponse = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
+      );
+      const castData = await castResponse.json();
+      if (response.status === 404 || castResponse.status === 404) {
         setLoading(false);
         setNotFound(true);
         return;
@@ -31,8 +37,9 @@ export const MovieDetail = () => {
         );
       }
       setMovieDetail(data);
+      setCast(castData.cast);
       setLoading(false);
-      console.log(data);
+      console.log(castData);
     } catch (e) {
       // we can log the error in case it will be useful for users when reporting bugs to us
       console.error(e);
@@ -77,6 +84,8 @@ export const MovieDetail = () => {
                   </span>
                 </h2>
                 <p>{movieDetail.overview}</p>
+                <h4>Top Cast</h4>
+                <CastDetail cast={cast} />
               </div>
             </div>
           </div>
