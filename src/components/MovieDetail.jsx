@@ -54,12 +54,12 @@ export const MovieDetail = () => {
               src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
             />
             <div className="movieDetailDetails">
-              <h1>
+              <h2>
                 <span className="title">{movieDetail.original_title}</span>
                 <span className="rating">
                   {movieDetail.vote_average.toFixed(1)}
                 </span>
-              </h1>
+              </h2>
               <p>{movieDetail.overview}</p>
             </div>
           </div>
