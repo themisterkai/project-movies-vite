@@ -216,6 +216,12 @@ a {
     width: 33.33%;
   }
 
+  .movieDetail img {
+    margin-top: 0px;
+    max-width: 350px;
+    width: 100%;
+  }
+
   .actorDetail .actorDetailSummary,
   .movieDetail .movieDetailSummary {
     padding: 50px;
@@ -235,8 +241,11 @@ a {
   .movieDetail .movieDetailSummary {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
     padding: 50px;
+  }
+
+  .movieDetail .movieDetailSummary {
+    align-items: flex-end;
   }
 
   .actorDetailDetails,
@@ -246,11 +255,16 @@ a {
 
   .movieDetail img {
     margin-top: 0px;
+    max-width: 350px;
+    width: 100%;
   }
 
-  .actorDetail img {
-    position: relative;
-    top: -150px;
+  .actorDetailSummary img {
+    height: auto;
+    display: block;
+    max-width: 350px;
+    width: auto;
+    height: auto;
   }
 
   .back {
