@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 
-import { API_KEY, pageTitle } from '../constants';
+import { getURL, getPageTitle } from '../helpers';
 import { NotFound } from './NotFound';
 import { Loading } from './Loading';
 import { Back } from './Back';
@@ -16,14 +16,10 @@ export const ActorDetail = () => {
   const [loading, setLoading] = useState(true);
   const handleFetchData = async () => {
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/person/${id}?api_key=${API_KEY}&language=en-US`
-      );
+      const response = await fetch(getURL('actorDetail', id));
       const data = await response.json();
 
-      const movieResponse = await fetch(
-        `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${API_KEY}&language=en-US`
-      );
+      const movieResponse = await fetch(getURL('actorCredits', id));
       const castData = await movieResponse.json();
       if (response.status === 404 || movieResponse.status === 404) {
         setLoading(false);
@@ -53,7 +49,7 @@ export const ActorDetail = () => {
   }, []);
 
   useEffect(() => {
-    window.document.title = pageTitle + ' | ' + actorDetail.name;
+    window.document.title = getPageTitle(actorDetail.name);
   }, [actorDetail]);
 
   return (
