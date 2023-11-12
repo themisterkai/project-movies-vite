@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { API_KEY } from '../constants';
 import { NotFound } from './NotFound';
 import { Loading } from './Loading';
 import { CastDetail } from './CastDetail';
+import { Back } from './Back';
 
 export const MovieDetail = () => {
   const { id } = useParams();
@@ -39,7 +40,6 @@ export const MovieDetail = () => {
       setMovieDetail(data);
       setCast(castData.cast);
       setLoading(false);
-      console.log(castData);
     } catch (e) {
       // we can log the error in case it will be useful for users when reporting bugs to us
       console.error(e);
@@ -54,15 +54,10 @@ export const MovieDetail = () => {
     (loading && <Loading />) ||
     (!loading &&
       (notFound ? (
-        <NotFound />
+        <NotFound type="movie" />
       ) : (
         <div className="movieDetail">
-          <Link className="back" to={`/`}>
-            <span className="material-symbols-outlined">
-              arrow_back_ios_new
-            </span>
-            Home
-          </Link>
+          <Back />
           <div
             className="movieDetailBackground"
             style={{
@@ -73,9 +68,11 @@ export const MovieDetail = () => {
             }}
           >
             <div className="movieDetailSummary">
-              <img
-                src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
-              />
+              {movieDetail.poster_path && (
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
+                />
+              )}
               <div className="movieDetailDetails">
                 <h2>
                   <span className="title">{movieDetail.original_title}</span>
