@@ -12,7 +12,7 @@ export const MoviePoster = ({
   const posterImage = `https://image.tmdb.org/t/p/w500${posterPath}`;
   return (
     <div className="moviePosterContainer">
-      <Link to={`/movies/${id}`} state={originalTitle}>
+      <Link to={`/movies/${id}`} title={originalTitle}>
         <HoverOverlay originalTitle={originalTitle} releaseDate={releaseDate} />
       </Link>
       <img src={posterImage} />

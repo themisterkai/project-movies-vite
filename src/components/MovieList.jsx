@@ -1,15 +1,13 @@
-// import { PropTypes } from 'prop-movieListTypes';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { MoviePoster } from './MoviePoster';
-import { NotFound } from './NotFound';
 import { getURL, getPageTitle } from '../helpers';
 import { Loading } from './Loading';
+import { MoviePoster } from './MoviePoster';
+import { NotFound } from './NotFound';
 
 export const MovieList = () => {
   const { movieListType = 'popular' } = useParams();
-  console.log('movieListType', movieListType);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -34,7 +32,6 @@ export const MovieList = () => {
       }
       setMovies(data.results);
       setLoading(false);
-      console.log(data.results);
     } catch (e) {
       // we can log the error in case it will be useful for users when reporting bugs to us
       console.error(e);
@@ -59,18 +56,21 @@ export const MovieList = () => {
             <Link
               className={movieListType === 'popular' ? 'topnav-active' : ''}
               to={'/'}
+              title="Popular Movies"
             >
               Popular
             </Link>
             <Link
               className={movieListType === 'top_rated' ? 'topnav-active' : ''}
               to={'/top_rated'}
+              title="Top-Rated Movies"
             >
               Top-Rated
             </Link>
             <Link
               className={movieListType === 'upcoming' ? 'topnav-active' : ''}
               to={'/upcoming'}
+              title="Upcoming Movies"
             >
               Upcoming
             </Link>
@@ -88,6 +88,4 @@ export const MovieList = () => {
   );
 };
 
-MovieList.propTypes = {
-  // movies: PropTypes.array.isRequired,
-};
+MovieList.propTypes = {};

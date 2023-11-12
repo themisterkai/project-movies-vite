@@ -10,7 +10,7 @@ export const TopMovies = ({ movies }) => {
         .sort((a, b) => new Date(a.release_date) - new Date(b.release_date))
         .map(movie => (
           <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
+            <Link to={`/movies/${movie.id}`} title={movie.original_title}>
               {movie.original_title} (
               {movie.release_date !== ''
                 ? `${movie.release_date.slice(0, 4)}`
