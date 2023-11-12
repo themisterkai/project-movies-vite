@@ -81,7 +81,6 @@ export const MovieDetail = () => {
                   </span>
                 </h2>
                 <p>{movieDetail.overview}</p>
-                <h4>Top Cast</h4>
                 <CastDetail cast={cast} />
               </div>
             </div>
