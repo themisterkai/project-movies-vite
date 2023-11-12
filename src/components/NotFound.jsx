@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { getPageTitle } from '../helpers';
 
-export const NotFound = ({ notFoundType = 'movie', setNotFound }) => {
+export const NotFound = ({ notFoundType = 'page', setNotFound }) => {
   window.document.title = getPageTitle('Not Found');
   return (
     <div className="notFound">

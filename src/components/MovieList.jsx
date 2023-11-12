@@ -46,11 +46,7 @@ export const MovieList = () => {
 
   return (
     ((loading || notFound) && (
-      <LoadingOrNotFound
-        loading={loading}
-        notFound={notFound}
-        notFoundType="movie"
-      />
+      <LoadingOrNotFound loading={loading} notFound={notFound} />
     )) || (
       <div className="movieWrapper">
         <div className="topnav">
