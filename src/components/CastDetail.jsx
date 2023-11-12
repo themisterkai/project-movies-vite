@@ -6,7 +6,9 @@ export const CastDetail = ({ cast }) => (
     <h4>Top Cast</h4>
     {cast.slice(0, 5).map(cast => (
       <li key={cast.id}>
-        <Link to={`/actors/${cast.id}`}>{cast.name}</Link>
+        <Link to={`/actors/${cast.id}`} title={cast.name}>
+          {cast.name}
+        </Link>
       </li>
     ))}
   </>

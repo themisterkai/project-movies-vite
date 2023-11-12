@@ -1,7 +1,8 @@
 import { Route } from 'react-router-dom';
-import { MovieList } from '../components/MovieList';
-import { MovieDetail } from '../components/MovieDetail';
+
 import { ActorDetail } from '../components/ActorDetail';
+import { MovieDetail } from '../components/MovieDetail';
+import { MovieList } from '../components/MovieList';
 
 const routes = (
   <>

@@ -13,6 +13,7 @@ export const MovieDetail = () => {
   const [cast, setCast] = useState([]);
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(true);
+
   const handleFetchData = async () => {
     try {
       const response = await fetch(getURL('movieDetail', id));
@@ -24,7 +25,10 @@ export const MovieDetail = () => {
         setNotFound(true);
         return;
       }
-      if (response.status >= 400 && response.status < 600) {
+      if (
+        (response.status >= 400 && response.status < 600) ||
+        (castResponse.status >= 400 && castResponse.status < 600)
+      ) {
         throw new Error(
           JSON.stringify({
             code: response.status,
@@ -36,7 +40,6 @@ export const MovieDetail = () => {
       setMovieDetail(data);
       setCast(castData.cast);
       setLoading(false);
-      console.log(castData);
     } catch (e) {
       // we can log the error in case it will be useful for users when reporting bugs to us
       console.error(e);
@@ -72,6 +75,7 @@ export const MovieDetail = () => {
               {movieDetail.poster_path && (
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
+                  alt={`Poster of ${movieDetail.original_title}`}
                 />
               )}
               <div className="movieDetailDetails">

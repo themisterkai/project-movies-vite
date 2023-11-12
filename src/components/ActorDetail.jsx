@@ -1,19 +1,20 @@
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import moment from 'moment';
 
 import { getURL, getPageTitle } from '../helpers';
+import { Back } from './Back';
 import { NotFound } from './NotFound';
 import { Loading } from './Loading';
-import { Back } from './Back';
 import { TopMovies } from './TopMovies';
 
 export const ActorDetail = () => {
   const { id } = useParams();
   const [actorDetail, setActorDetail] = useState({});
+  const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [notFound, setNotFound] = useState(false);
-  const [loading, setLoading] = useState(true);
+
   const handleFetchData = async () => {
     try {
       const response = await fetch(getURL('actorDetail', id));
@@ -26,7 +27,10 @@ export const ActorDetail = () => {
         setNotFound(true);
         return;
       }
-      if (response.status >= 400 && response.status < 600) {
+      if (
+        (response.status >= 400 && response.status < 600) ||
+        (movieResponse.status >= 400 && movieResponse.status < 600)
+      ) {
         throw new Error(
           JSON.stringify({
             code: response.status,
@@ -64,6 +68,7 @@ export const ActorDetail = () => {
             {actorDetail.profile_path && (
               <img
                 src={`https://image.tmdb.org/t/p/w500${actorDetail.profile_path}`}
+                alt={`Picture of ${actorDetail.name}`}
               />
             )}
             <div className="actorDetailDetails">
@@ -79,6 +84,7 @@ export const ActorDetail = () => {
               {actorDetail.imdb_id && (
                 <p>
                   <a
+                    title="IMDB link"
                     href={`https://www.imdb.com/name/${actorDetail.imdb_id}`}
                     target={`_blank`}
                   >

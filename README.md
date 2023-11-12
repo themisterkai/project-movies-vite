@@ -6,32 +6,25 @@
 
 # Movie Site Project
 
-Replace this readme with your own information about your project.
-
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
-
-## Getting Started with the Project
+This is a project made using React. Data is pulled from the API of [themoviedb.org](themoviedb.org)
 
 ### Dependency Installation & Startup Development Server
-
-Once cloned, navigate to the project's root directory and this project uses npm (Node Package Manager) to manage its dependencies.
-
-The command below is a combination of installing dependencies, opening up the project on VS Code and it will run a development server on your terminal.
 
 ```bash
 npm i && code . && npm run dev
 ```
 
-### The Problem
+### Description
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+This project has implemented all the basic requirements as well as the intermediate and advanced stretch goals.
+
+- The app follows the design
+- The app adapts to the different viewports
+- We show a 'not found' page when the user tries to access a page with an invalid movie id or invalid actor id. It will also show this for a random URL.
+- We show a 'loading' page while we wait for the API pull to complete.
+- On the homepage, the user can select between popular, top-rated, and upcoming movies. I chose to display this as links instead of a dropdown because it looks better.
+- Added the actor information for the movies (using a different API route), which when clicked, will take us to a new page about the actor filmography.
 
 ### View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
-
-## Instructions
-
-<a href="instructions.md">
-   See instructions of this project
-  </a>
+[https://kai-movies.netlify.app/](https://kai-movies.netlify.app/)

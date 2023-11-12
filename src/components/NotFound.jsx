@@ -1,5 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
+
 import { getPageTitle } from '../helpers';
 
 export const NotFound = ({ type, setNotFound }) => {
@@ -12,6 +13,7 @@ export const NotFound = ({ type, setNotFound }) => {
         className="notFoundHome"
         to={`/`}
         onClick={() => setNotFound(false)}
+        title="Back to Home"
       >
         <h3>Check out new movies intead</h3>
       </Link>
