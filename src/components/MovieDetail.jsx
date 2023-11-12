@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { API_KEY, pageTitle } from '../constants';
+import { getURL, getPageTitle } from '../helpers';
 import { NotFound } from './NotFound';
 import { Loading } from './Loading';
 import { CastDetail } from './CastDetail';
@@ -15,13 +15,9 @@ export const MovieDetail = () => {
   const [loading, setLoading] = useState(true);
   const handleFetchData = async () => {
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
-      );
+      const response = await fetch(getURL('movieDetail', id));
       const data = await response.json();
-      const castResponse = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
-      );
+      const castResponse = await fetch(getURL('movieCredits', id));
       const castData = await castResponse.json();
       if (response.status === 404 || castResponse.status === 404) {
         setLoading(false);
@@ -40,6 +36,7 @@ export const MovieDetail = () => {
       setMovieDetail(data);
       setCast(castData.cast);
       setLoading(false);
+      console.log(castData);
     } catch (e) {
       // we can log the error in case it will be useful for users when reporting bugs to us
       console.error(e);
@@ -51,7 +48,7 @@ export const MovieDetail = () => {
   }, []);
 
   useEffect(() => {
-    window.document.title = pageTitle + ' | ' + movieDetail.original_title;
+    window.document.title = getPageTitle(movieDetail.original_title);
   }, [movieDetail]);
 
   return (

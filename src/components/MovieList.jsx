@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { MoviePoster } from './MoviePoster';
-import { API_KEY, pageTitle } from '../constants';
+import { NotFound } from './NotFound';
+import { getURL, getPageTitle } from '../helpers';
 import { Loading } from './Loading';
 
 export const MovieList = () => {
@@ -11,12 +12,17 @@ export const MovieList = () => {
   console.log('movieListType', movieListType);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
   const handleFetchData = async () => {
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieListType}?api_key=${API_KEY}&language=en-US&page=1`
-      );
+      const response = await fetch(getURL(movieListType));
       const data = await response.json();
+
+      if (response.status === 404) {
+        setLoading(false);
+        setNotFound(true);
+        return;
+      }
       if (response.status >= 400 && response.status < 600) {
         throw new Error(
           JSON.stringify({
@@ -37,44 +43,48 @@ export const MovieList = () => {
 
   useEffect(() => {
     handleFetchData();
-    window.document.title =
-      pageTitle + ' | ' + movieListType.replace('_', '-') + ' Movies';
+    window.document.title = getPageTitle(
+      movieListType.replace('_', '-') + ' Movies'
+    );
   }, [movieListType]);
 
   return (
     (loading && <Loading />) ||
-    (!loading && (
-      <div className="movieWrapper">
-        <div className="topnav">
-          <Link
-            className={movieListType === 'popular' ? 'topnav-active' : ''}
-            to={'/'}
-          >
-            Popular
-          </Link>
-          <Link
-            className={movieListType === 'top_rated' ? 'topnav-active' : ''}
-            to={'/top_rated'}
-          >
-            Top-Rated
-          </Link>
-          <Link
-            className={movieListType === 'upcoming' ? 'topnav-active' : ''}
-            to={'/upcoming'}
-          >
-            Upcoming
-          </Link>
-          <span className="pageTitle">
-            <h3>Kai&apos;s Movie Site</h3>
-          </span>
-        </div>
-        {movies.map(movie => (
-          <div key={movie.id} className="movies">
-            <MoviePoster {...movie} />
+    (!loading &&
+      (notFound ? (
+        <NotFound type="movie" setNotFound={setNotFound} />
+      ) : (
+        <div className="movieWrapper">
+          <div className="topnav">
+            <Link
+              className={movieListType === 'popular' ? 'topnav-active' : ''}
+              to={'/'}
+            >
+              Popular
+            </Link>
+            <Link
+              className={movieListType === 'top_rated' ? 'topnav-active' : ''}
+              to={'/top_rated'}
+            >
+              Top-Rated
+            </Link>
+            <Link
+              className={movieListType === 'upcoming' ? 'topnav-active' : ''}
+              to={'/upcoming'}
+            >
+              Upcoming
+            </Link>
+            <span className="pageTitle">
+              <h3>Kai&apos;s Movie Site</h3>
+            </span>
           </div>
-        ))}
-      </div>
-    ))
+          {movies.map(movie => (
+            <div key={movie.id} className="movies">
+              <MoviePoster {...movie} />
+            </div>
+          ))}
+        </div>
+      )))
   );
 };
 

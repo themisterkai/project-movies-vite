@@ -54,6 +54,18 @@ a {
   pointer-events: none;
 }
 
+.pageTitle {
+  float: right;
+}
+
+.pageTitle h3 {
+  font-family: 'permanentMarker';
+  color: rgb(255, 255, 255);
+  text-shadow: 3px 3px rgb(168, 9, 9);
+  margin-top: 8px;
+  margin-right: 10px;
+}
+
 .movieWrapper {
   display: flex;
   flex-wrap: wrap;
@@ -102,7 +114,7 @@ a {
   align-items: center;
   font-weight: 700;
   text-decoration: none;
-  left: 50px;
+  left: 20px;
   top: 20px;
   background: rgb(104, 104, 104, 0.3);
   padding: 8px;
@@ -134,7 +146,7 @@ a {
 .movieDetail .movieDetailSummary {
   display: flex;
   flex-direction: column;
-  padding: 50px;
+  padding: 50px 20px 20px;
   background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%);
 }
 
@@ -172,7 +184,7 @@ a {
 
 .actorDetailDetails p,
 .movieDetailDetails p {
-  max-width: 400px;
+  max-width: 90%;
   text-shadow: 1px 1px #4d4d4d;
 }
 
@@ -180,43 +192,6 @@ a {
   background: grey;
   background-image: linear-gradient(rgba(0, 0, 0, 0) -100%, rgb(0, 0, 0) 100%);
 }
-/* 
-.actorDetail {
-  position: relative;
-  color: white;
-  background: white;
-}
-
-.acti
-
-.actorDetailSummary {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  padding: 100px 50px 50px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0) -100%, rgb(0, 0, 0) 100%);
-}
-
-.actorDetail img {
-  border: 5px solid #fff;
-  width: 250px;
-}
-
-.actorDetailDetails {
-  margin-left: 10px;
-  padding: 30px;
-}
-*/
-
-/* .actorDetailDetails .actorName {
-  margin-right: 10px;
-  text-shadow: 1px 1px #4d4d4d;
-} */
-
-/* .actorDetailDetails p {
-  max-width: 400px;
-  text-shadow: 1px 1px #4d4d4d;
-} */
 
 .notFound,
 .loading {
@@ -236,21 +211,18 @@ a {
   text-shadow: 3px 3px rgb(168, 9, 9);
 }
 
-.pageTitle {
-  float: right;
-}
-
-.pageTitle h3 {
-  font-family: 'permanentMarker';
-  color: rgb(255, 255, 255);
-  text-shadow: 3px 3px rgb(168, 9, 9);
-  margin-top: 8px;
-  margin-right: 10px;
-}
-
 @media (min-width: 570px) {
   .movies {
     width: 33.33%;
+  }
+
+  .actorDetail .actorDetailSummary,
+  .movieDetail .movieDetailSummary {
+    padding: 50px;
+  }
+
+  .back {
+    left: 50px;
   }
 }
 
@@ -265,7 +237,6 @@ a {
     flex-direction: row;
     align-items: flex-end;
     padding: 50px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%);
   }
 
   .actorDetailDetails,
@@ -273,8 +244,16 @@ a {
     padding: 30px;
   }
 
-  .actorDetail img,
   .movieDetail img {
     margin-top: 0px;
+  }
+
+  .actorDetail img {
+    position: relative;
+    top: -150px;
+  }
+
+  .back {
+    left: 50px;
   }
 }
