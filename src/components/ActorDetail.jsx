@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import { API_KEY } from '../constants';
 import { NotFound } from './NotFound';
 import { Loading } from './Loading';
+import { Back } from './Back';
+import { TopMovies } from './TopMovies';
 
 export const ActorDetail = () => {
   const { id } = useParams();
@@ -38,10 +40,8 @@ export const ActorDetail = () => {
         );
       }
       setActorDetail(data);
-      setMovies(castData.cast.slice(0, 10));
+      setMovies(castData.cast);
       setLoading(false);
-      console.log(data);
-      console.log(castData);
     } catch (e) {
       // we can log the error in case it will be useful for users when reporting bugs to us
       console.error(e);
@@ -56,34 +56,19 @@ export const ActorDetail = () => {
     (loading && <Loading />) ||
     (!loading &&
       (notFound ? (
-        <NotFound />
+        <NotFound type="actor" />
       ) : (
         <div className="actorDetail">
-          <Link className="back" to={`/`}>
-            <span className="material-symbols-outlined">
-              arrow_back_ios_new
-            </span>
-            Home
-          </Link>
-          {/* <div
-          className="actorDetailBackground"
-          style={{
-            backgroundImage:
-              'url(' +
-              `https://image.tmdb.org/t/p/w1280${actorDetail.backdrop_path}` +
-              ')',
-          }}
-        > */}
+          <Back />
           <div className="actorDetailSummary">
-            <img
-              src={`https://image.tmdb.org/t/p/w500${actorDetail.profile_path}`}
-            />
+            {actorDetail.profile_path && (
+              <img
+                src={`https://image.tmdb.org/t/p/w500${actorDetail.profile_path}`}
+              />
+            )}
             <div className="actorDetailDetails">
               <h2>
                 <span className="actorName">{actorDetail.name}</span>
-                {/* <span className="rating">
-                  {actorDetail.vote_average.toFixed(1)}
-                </span> */}
               </h2>
               {actorDetail.birthday && (
                 <p>Born: {moment(actorDetail.birthday).format('LL')}</p>
@@ -91,22 +76,17 @@ export const ActorDetail = () => {
               {actorDetail.deathday && (
                 <p>Died: {moment(actorDetail.deathday).format('LL')}</p>
               )}
-              {/* <p>
-                <a
-                  href={`https://www.imdb.com/name/${actorDetail.imdb_id}`}
-                  target={`_blank`}
-                >
-                  IMDB Profile
-                </a>
-              </p> */}
-              <h4>Top Movies</h4>
-              {movies.map(movie => (
-                <li key={movie.id}>
-                  <Link to={`/movies/${movie.id}`}>
-                    {movie.original_title} ({movie.release_date.slice(0, 4)})
-                  </Link>
-                </li>
-              ))}
+              {actorDetail.imdb_id && (
+                <p>
+                  <a
+                    href={`https://www.imdb.com/name/${actorDetail.imdb_id}`}
+                    target={`_blank`}
+                  >
+                    IMDB Profile (External Link)
+                  </a>
+                </p>
+              )}
+              <TopMovies movies={movies} />
             </div>
           </div>
         </div>

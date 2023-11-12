@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 
 export const CastDetail = ({ cast }) => {
   return cast.slice(0, 3).map(cast => (
-    <li key={cast.id}>
-      <Link to={`/actors/${cast.id}`}>{cast.name}</Link>
-    </li>
+    <>
+      <h4>Top Cast</h4>
+      <li key={cast.id}>
+        <Link to={`/actors/${cast.id}`}>{cast.name}</Link>
+      </li>
+    </>
   ));
 };
 
