@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { API_KEY } from '../constants';
+import { API_KEY, pageTitle } from '../constants';
 import { NotFound } from './NotFound';
 import { Loading } from './Loading';
 import { CastDetail } from './CastDetail';
@@ -49,6 +49,10 @@ export const MovieDetail = () => {
   useEffect(() => {
     handleFetchData();
   }, []);
+
+  useEffect(() => {
+    window.document.title = pageTitle + ' | ' + movieDetail.original_title;
+  }, [movieDetail]);
 
   return (
     (loading && <Loading />) ||

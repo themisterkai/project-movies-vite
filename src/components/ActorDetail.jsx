@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 
-import { API_KEY } from '../constants';
+import { API_KEY, pageTitle } from '../constants';
 import { NotFound } from './NotFound';
 import { Loading } from './Loading';
 import { Back } from './Back';
@@ -51,6 +51,10 @@ export const ActorDetail = () => {
   useEffect(() => {
     handleFetchData();
   }, []);
+
+  useEffect(() => {
+    window.document.title = pageTitle + ' | ' + actorDetail.name;
+  }, [actorDetail]);
 
   return (
     (loading && <Loading />) ||
