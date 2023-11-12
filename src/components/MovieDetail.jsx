@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getURL, getPageTitle } from '../helpers';
-import { NotFound } from './NotFound';
-import { Loading } from './Loading';
 import { CastDetail } from './CastDetail';
 import { Back } from './Back';
+import { LoadingOrNotFound } from './LoadingOrNotFound';
 
 export const MovieDetail = () => {
   const { id } = useParams();
@@ -55,43 +54,45 @@ export const MovieDetail = () => {
   }, [movieDetail]);
 
   return (
-    (loading && <Loading />) ||
-    (!loading &&
-      (notFound ? (
-        <NotFound type="movie" />
-      ) : (
-        <div className="movieDetail">
-          <Back />
-          <div
-            className="movieDetailBackground"
-            style={{
-              backgroundImage:
-                'url(' +
-                `https://image.tmdb.org/t/p/w1280${movieDetail.backdrop_path}` +
-                ')',
-            }}
-          >
-            <div className="movieDetailSummary">
-              {movieDetail.poster_path && (
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
-                  alt={`Poster of ${movieDetail.original_title}`}
-                />
-              )}
-              <div className="movieDetailDetails">
-                <h2>
-                  <span className="title">{movieDetail.original_title}</span>
-                  <span className="rating">
-                    {movieDetail.vote_average.toFixed(1)}
-                  </span>
-                </h2>
-                <p>{movieDetail.overview}</p>
-                <CastDetail cast={cast} />
-              </div>
+    ((loading || notFound) && (
+      <LoadingOrNotFound
+        loading={loading}
+        notFound={notFound}
+        notFoundType="movie"
+      />
+    )) || (
+      <div className="movieDetail">
+        <Back />
+        <div
+          className="movieDetailBackground"
+          style={{
+            backgroundImage:
+              'url(' +
+              `https://image.tmdb.org/t/p/w1280${movieDetail.backdrop_path}` +
+              ')',
+          }}
+        >
+          <div className="movieDetailSummary">
+            {movieDetail.poster_path && (
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
+                alt={`Poster of ${movieDetail.original_title}`}
+              />
+            )}
+            <div className="movieDetailDetails">
+              <h2>
+                <span className="title">{movieDetail.original_title}</span>
+                <span className="rating">
+                  {movieDetail.vote_average.toFixed(1)}
+                </span>
+              </h2>
+              <p>{movieDetail.overview}</p>
+              <CastDetail cast={cast} />
             </div>
           </div>
         </div>
-      )))
+      </div>
+    )
   );
 };
 
