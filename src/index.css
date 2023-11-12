@@ -27,9 +27,38 @@ a {
   color: white;
 }
 
+.topnav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav-active {
+  background-color: #04aa6d;
+  color: white;
+  pointer-events: none;
+}
+
 .movieWrapper {
   display: flex;
   flex-wrap: wrap;
+  position: relative;
+  top: 48px;
 }
 
 .movies {
@@ -205,6 +234,18 @@ a {
   font-size: 80px;
   color: rgb(255, 255, 255);
   text-shadow: 3px 3px rgb(168, 9, 9);
+}
+
+.pageTitle {
+  float: right;
+}
+
+.pageTitle h3 {
+  font-family: 'permanentMarker';
+  color: rgb(255, 255, 255);
+  text-shadow: 3px 3px rgb(168, 9, 9);
+  margin-top: 8px;
+  margin-right: 10px;
 }
 
 @media (min-width: 570px) {
